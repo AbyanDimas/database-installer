@@ -1,79 +1,97 @@
-# Script Instalasi Database
+# Database Installation Script
 
-## Deskripsi
-Repository ini berisi script Bash untuk mengotomatisasi instalasi dan konfigurasi database populer: MySQL, MariaDB, dan MongoDB. Script ini memungkinkan pengaturan cepat dan menyediakan opsi untuk mengkonfigurasi pengguna database, kata sandi, dan database awal secara interaktif.
+## Description
+Repository ini berisi kumpulan skrip Bash untuk mengotomatisasi instalasi, konfigurasi, backup, restore, dan pengecekan status database populer seperti MySQL, MariaDB, dan MongoDB. Skrip ini dirancang untuk mempermudah pengelolaan database dengan interaksi yang sederhana.
 
-## Fitur
-- Menginstal dan mengkonfigurasi MySQL, MariaDB, atau MongoDB.
-- Prompt interaktif untuk kredensial pengguna database dan aksesibilitas.
-- Opsi pembuatan database awal untuk MySQL dan MariaDB.
-- Konfigurasi firewall otomatis untuk akses database.
+## Fitur Utama
+1. **Instalasi Database:**
+   - Pilih dan instal MySQL, MariaDB, atau MongoDB.
+   - Konfigurasi aksesibilitas dan kredensial database.
+   - Opsional membuat database awal untuk MySQL dan MariaDB.
+
+2. **Backup Database:**
+   - Backup MySQL/MariaDB ke file `.sql`.
+   - Backup MongoDB ke direktori yang ditentukan.
+
+3. **Restore Database:**
+   - Restore MySQL/MariaDB dari file `.sql`.
+   - Restore MongoDB dari direktori backup.
+
+4. **Pengecekan Status Database:**
+   - Memeriksa apakah layanan database (MySQL, MariaDB, atau MongoDB) sedang berjalan.
+
+5. **Konfigurasi Firewall:**
+   - Membuka port yang diperlukan untuk akses database.
 
 ## Prasyarat
-- Sistem berbasis Linux (diuji pada Ubuntu).
+- Sistem berbasis Linux (teruji pada Ubuntu).
 - Akses `sudo` untuk menjalankan perintah instalasi.
 
-## Cara Penggunaan
+## Penggunaan
 1. Clone repository:
    ```bash
    git clone https://github.com/abyandimas/database-installer.git
    cd database-installer
    ```
 
-2. Jadikan script dapat dieksekusi:
+2. Buat skrip dapat dieksekusi:
    ```bash
-   chmod +x install-database.sh
+   chmod +x *.sh
    ```
 
-3. Jalankan script:
-   ```bash
-   ./install-database.sh
-   ```
+3. Jalankan skrip sesuai kebutuhan:
 
-4. Ikuti prompt interaktif untuk memilih database, mengkonfigurasi kredensial, dan membuat database awal (opsional).
+   - Untuk instalasi database:
+     ```bash
+     ./install-database.sh
+     ```
+   - Untuk backup database:
+     ```bash
+     ./backup-database.sh
+     ```
+   - Untuk restore database:
+     ```bash
+     ./restore-database.sh
+     ```
+   - Untuk pengecekan status:
+     ```bash
+     ./check-status.sh
+     ```
 
-## Alur Kerja Script
-1. **Update Sistem:** Memastikan paket sistem Anda diperbarui.
-2. **Pemilihan Database:** Memungkinkan Anda memilih antara MySQL, MariaDB, dan MongoDB.
-3. **Pengaturan Pengguna dan Kata Sandi:** Prompt untuk nama pengguna dan kata sandi untuk MySQL/MariaDB.
-4. **Aksesibilitas Database:** Opsi untuk mengkonfigurasi akses publik atau privat.
-5. **Pembuatan Database Awal:** Langkah opsional untuk MySQL/MariaDB.
-6. **Konfigurasi Firewall:** Membuka port yang diperlukan secara otomatis.
+4. Ikuti petunjuk interaktif yang ditampilkan oleh skrip.
 
-## Database yang Didukung
-### MySQL
-- Menginstal server MySQL.
-- Mengkonfigurasi `bind-address` untuk akses jarak jauh.
-- Memberikan hak akses kepada pengguna yang ditentukan.
+## Alur Skrip
+1. **Instalasi Database:**
+   - Update sistem.
+   - Instal database yang dipilih.
+   - Konfigurasi aksesibilitas dan kredensial.
+   - Opsional membuat database awal.
 
-### MariaDB
-- Menginstal server MariaDB.
-- Mengkonfigurasi `bind-address` untuk akses jarak jauh.
-- Memberikan hak akses kepada pengguna yang ditentukan.
+2. **Backup Database:**
+   - Backup MySQL/MariaDB ke file `.sql` menggunakan `mysqldump`.
+   - Backup MongoDB ke direktori dengan `mongodump`.
 
-### MongoDB
-- Menginstal server MongoDB.
-- Mengaktifkan dan memulai layanan MongoDB.
+3. **Restore Database:**
+   - Restore MySQL/MariaDB dari file `.sql` menggunakan `mysql`.
+   - Restore MongoDB dari direktori backup dengan `mongorestore`.
+
+4. **Pengecekan Status Database:**
+   - Memastikan layanan database aktif menggunakan `systemctl`.
 
 ## Contoh Output
-### MySQL/MariaDB
+### MySQL/MariaDB Backup
 ```
-Database telah berhasil diinstal dan dikonfigurasi.
-
-Petunjuk untuk mengakses database:
-- Gunakan MySQL/MariaDB Client:
-  mysql -u username -p -h [IP_SERVER]
-  Masukkan password saat diminta.
+Backup berhasil disimpan di nama_database_backup_2024-12-31.sql
 ```
 
-### MongoDB
+### MongoDB Backup
 ```
-Database telah berhasil diinstal dan dikonfigurasi.
-
-Petunjuk untuk mengakses database:
-- Gunakan Mongo Shell:
-  mongo --host [IP_SERVER]
+Backup berhasil disimpan di nama_database_backup_2024-12-31
 ```
 
-## Kontak
-Untuk pertanyaan silahkan ke menu issues
+### Status Database
+```
+Layanan mysql sedang berjalan.
+Layanan mongodb tidak berjalan.
+```
+
